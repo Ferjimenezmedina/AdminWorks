@@ -1,0 +1,167 @@
+@extends('company.admin_layout')
+
+@section('title') {{ $vacant->title }}   @stop
+
+@section('titleHeader')Vacante Realizada @stop
+
+@section('content')
+    <div class="container">
+        <div class="row card-panel">
+            <div class="col s12">
+                <section class="">
+
+                    <div class="row ">
+                        <div class="col s9 m9 l10 ">
+                            <h4 class="grey-text text-darken-4">{{ $vacant->title }}</h4>
+                            @if($vacant->show_name)
+                                <h5 class="black-text"><i class="material-icons ico-aling grey-text text-darken-4 ">label</i>{{ $vacant->company->nombre}}</h5>
+                            @else
+                                <h5 class="black-text"><i class="material-icons ico-aling grey-text text-darken-4 ">label</i>Empresa Importante en el Ramo 2</h5>
+                            @endif
+                            <h6 class="condensada-regular">{{ $vacant->company->user->fullname }}</h6>
+                            @if($vacant->show_email)
+                                <h6 class="condensada-italica">{{ $vacant->company->user->email }}</h6>
+                            @endif
+                            <div class="col s12">
+                                <ul class="lista-detalle black-text text-darken-2">
+                                    <li><i class="material-icons ico-aling">location_on</i> {{ $vacant->state->nombre.', '.$vacant->mpio->nombre }}</li>
+                                    <li><i class="material-icons ico-aling">library_books</i>{{ $vacant->specialty }}</li>
+                                    @if($vacant->show_phone)
+                                        <li><i class="material-icons ico-aling">contact_phone</i> {{ $vacant->company->telefono }}</li>
+                                    @endif
+                                    @if($vacant->public_min_pay)
+                                        <li><i class="material-icons tiny ico-aling-tiny">attach_money</i>{{ $vacant->min_salary }}</li>
+                                    @endif
+                                    @if($vacant->public_max_pay)
+                                       <li><i class="material-icons ico-aling">attach_money</i>{{ $vacant->max_salary }}</li>
+                                    @endif
+                                    <li><i class="material-icons ico-aling">work</i>{{ trans('empleados.type_contract.'.$vacant->type_contract) }}</li>
+                                    <li><i class="material-icons ico-aling">timer</i>{{ trans('empleados.type_schedule.'.$vacant->type_schedule) }}</li>
+                                    <li><i class="material-icons ico-aling">monetization_on</i>{{ trans('empleados.type_salary.'.$vacant->type_salary) }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col s3 m3 l2 center ">
+                            @if($vacant->show_logo)
+                                <p><i class="material-icons ico-aling">event_note</i>Publicada: <br>
+                                    <span class="blue-text">
+                                        {{ trans('empleados.dates.'.$vacant->created_at->format('F')).' '.$vacant->created_at->format('d, Y h:ia') }}
+                                    </span>
+                                </p>
+                                @if($vacant->company->user->photo)
+                                    <img class="responsive-img" src="{!!asset('cvs/dir'.$vacant->company->user->id.'/'.$vacant->company->user->photo)!!}">
+                                @else
+                                    <img class="responsive-img" src="{!!asset('img/cuenta.svg')!!}" onerror="this.onerror=null; this.src='{!!asset('img/cuenta.png')!!}'">
+                                @endif
+                            @else
+                                <br class="hide-on-med-and-up">
+                                <img class="responsive-img" src="{!!asset('img/cuenta.svg')!!}" onerror="this.onerror=null; this.src='{!!asset('img/cuenta.png')!!}'">
+                            @endif
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="divider"></div>
+                    <div class="row caja-empleo">
+                        <h5 class="blue-text condensada-regular">Descripción de la vacante:</h5>
+                        <p class="justificado p-descrip-disdad2 font-large" >{{ $vacant->description }}</p>
+                    </div>
+                    <div class="row">
+                        <div class="col s6 ">
+                            <p><i class="material-icons tiny ico-aling-tiny">attach_money</i>
+                                <strong>Sueldo Mínimo:</strong><span class="black-text">
+                                    @if($vacant->min_salary)
+                                        ${{ $vacant->min_salary }}
+                                    @else
+                                        Por especificar.
+                                    @endif
+                                </span>
+                            </p>
+                            <p><i class="material-icons ico-aling">recent_actors</i><strong>Vacantes:</strong>
+                                <span class="black-text">{{ $vacant->num_vacan }}</span>
+                            </p>
+                            <p><i class="material-icons ico-aling">date_range</i><strong>Pago: </strong>{{ trans('empleados.type_pay.'.$vacant->type_pay) }}</p>
+                        </div>
+                        <div class="col s6 ">
+                            <p>
+                                <i class="material-icons ico-aling">attach_money</i>
+                                <strong>Sueldo Máximo:</strong><span class="black-text">
+                                <span class="black-text">     
+                                @if($vacant->max_salary)
+                                        ${{ $vacant->max_salary }}
+                                    @else
+                                        Por especificar.
+                                    @endif
+                                </span>
+                            </p>
+                            <p><i class="material-icons ico-aling">local_airport</i><strong>Disponibilidad para Viajar:</strong>
+                            <span class="black-text">       
+                            @if($vacant->to_travel)
+                                        Si.
+                                    @else
+                                        No.
+                                    @endif
+                                </span>
+                            </p>
+                            <p><i class="material-icons ico-aling">local_shipping</i><strong>Disponibilidad para Cambio de Residencia:</strong>
+                                <span class="black-text">
+                                     @if($vacant->change_address)
+                                        Si.
+                                    @else
+                                        No.
+                                    @endif
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s11 offset">
+                            <h5 class="blue-text"><i class="material-icons ico-aling">label</i>Requisitos</h5>
+                            <blockquote>
+                                <ul class="p-descrip-disdad2">
+                                    @foreach($vacant->benefits as $ben)
+                                        <li>{{ $ben->benefit }}</li>
+                                    @endforeach
+                                </ul>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s8 offset">
+                            <h5 class="blue-text"><i class="material-icons ico-aling">label</i>Beneficios</h5>
+                            <blockquote>
+                                <ul class="p-descrip-disdad2">
+                                    @foreach($vacant->demands as $dem)
+                                        <li>{{ $dem->demand }}</li>
+                                    @endforeach
+                                </ul>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="row caja-empleo">
+                        <p>
+                        <h5 class="black-text"><i class="material-icons ico-aling">label</i>Comentarios Finales:</h5>
+                            {{ $vacant->final_comment }}
+                        </p>
+                    </div>
+                    <div class="divider"></div>
+                </section>
+                <div class="row">
+                    <div class="input-field col s12 right-align">
+                        <a href="{{ route('vacante.edit',$vacant->id) }}" class="btn waves-effect waves-light black darken-2 btn-large center">Editar Vacante
+                            <i class="material-icons left">create</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+@stop
+
+@section('script')
+
+
+
+@stop

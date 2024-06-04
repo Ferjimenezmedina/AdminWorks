@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: empleaDos
+        psr4_prefix: empleaDos
+        src_path: app

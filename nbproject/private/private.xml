@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/laragon/www/empleos/resources/views/phpsqlajax_dbinfo.php</file>
+            <file>file:/C:/laragon/www/empleos/app/Http/Controllers/MapController.php</file>
+            <file>file:/C:/laragon/www/empleos/resources/views/gmaps.xml</file>
+            <file>file:/C:/laragon/www/empleos/.env</file>
+            <file>file:/C:/laragon/www/empleos/resources/views/frontend/busqueda.blade.php</file>
+            <file>file:/C:/laragon/www/empleos/resources/views/frontend/partials/form-busqueda.blade.php</file>
+            <file>file:/C:/laragon/www/empleos/config/app.php</file>
+            <file>file:/C:/laragon/www/empleos/resources/views/auth/gmaps.blade.php</file>
+            <file>file:/C:/laragon/www/empleos/resources/views/auth/muestramapa.blade.php</file>
+            <file>file:/C:/laragon/www/empleos/resources/views/frontend/partials/parrafo-search.blade.php</file>
+            <file>file:/C:/laragon/www/empleos/resources/views/company/vacants_create/vacante-contrato.blade.php</file>
+            <file>file:/C:/laragon/www/empleos/resources/views/frontend/partials/form-busque-recive.blade.php</file>
+            <file>file:/C:/laragon/www/empleos/composer.json</file>
+            <file>file:/C:/laragon/www/empleos/resources/views/frontend/vacante_detalle.blade.php</file>
+        </group>
+    </open-files>
+</project-private>
